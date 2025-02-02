@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 interface WifiCredentials {
   brandName: string;
@@ -29,6 +30,7 @@ export default function WifiQRGenerator() {
   const [isEditing, setIsEditing] = useState(false);
   
   const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       brandName: process.env.NEXT_PUBLIC_BRAND_NAME || "name",
       ssid: process.env.NEXT_PUBLIC_DEFAULT_SSID || "",
@@ -46,8 +48,7 @@ export default function WifiQRGenerator() {
     return `WIFI:T:${form.watch("encryption")};S:${form.watch("ssid")};P:${form.watch("password")};;`
   }
 
-  const canGenerateQR = form.watch("ssid").trim() !== "" && 
-    (form.watch("encryption") === "nopass" || form.watch("password").trim() !== "");
+  const canGenerateQR = form.watch("ssid") && form.watch("password");
 
   return (
     <div className="relative min-h-screen w-full">
@@ -62,7 +63,7 @@ export default function WifiQRGenerator() {
             style={{ backgroundColor: form.watch("containerColor") }}
           >
             <div className="text-center mb-2">WIFI 접속</div>
-            {form.watch("ssid") ? (
+            {canGenerateQR ? (
               <QRCodeSVG value={generateWifiString()} size={200} bgColor="#ffffff" fgColor="#000000" />
             ) : (
               <div className="w-[200px] h-[200px] bg-gray-100 flex items-center justify-center text-gray-400">
@@ -74,7 +75,7 @@ export default function WifiQRGenerator() {
         </div>
 
         {/* Buttons */}
-        {form.watch("ssid") && (
+        {canGenerateQR && (
           <div className="flex justify-center gap-3">
             <Button
               onClick={() => {
