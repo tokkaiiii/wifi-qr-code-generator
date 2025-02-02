@@ -9,13 +9,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+interface WifiCredentials {
+  brandName: string;
+  ssid: string;
+  password: string;
+  encryption: "WPA" | "WEP" | "nopass";
+  containerColor: string;
+}
+
 const formSchema = z.object({
-  brandName: z.string(),
-  ssid: z.string(),
-  password: z.string(),
+  brandName: z.string().min(1),
+  ssid: z.string().min(1),
+  password: z.string().min(1),
   encryption: z.enum(["WPA", "WEP", "nopass"]),
   containerColor: z.string(),
-})
+}) satisfies z.ZodType<WifiCredentials>;
 
 export default function WifiQRGenerator() {
   const [isEditing, setIsEditing] = useState(false);
@@ -141,7 +149,7 @@ export default function WifiQRGenerator() {
               QR 저장
             </Button>
             <Button
-              onClick={() => setIsEditing(!isEditing)}
+              onClick={handleEditToggle}
               variant={isEditing ? "destructive" : "default"}
               className="flex items-center gap-2"
             >
