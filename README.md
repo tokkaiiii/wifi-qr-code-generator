@@ -1,4 +1,4 @@
-# Project Name
+# 와이파이 QR 코드 생성기
 
 Modern Next.js application built with TypeScript and cutting-edge technologies.
 
