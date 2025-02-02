@@ -119,12 +119,8 @@ pnpm test:coverage
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ## 연락처
 
-프로젝트 관리자 - [@twitter_handle](https://twitter.com/twitter_handle)
 
-프로젝트 링크: [https://github.com/username/project-name](https://github.com/username/project-name)
+프로젝트 링크: [https://github.com/tokkaiiii/wifi-qr-code-generator](https://github.com/tokkaiiii/wifi-qr-code-generator)
