@@ -111,6 +111,10 @@ pnpm test:coverage
 
 이 프로젝트는 Vercel에 최적화되어 있습니다. main 브랜치에 push하면 자동으로 배포됩니다.
 
+## 데모
+
+🌐 [실제 구동되는 데모 사이트 보기](https://wifi-qr-code-generator-x26h.vercel.app)
+
 ## 기여하기
 
 1. Fork the Project
